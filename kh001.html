@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خليل ويب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== الأساسيات ===== */
+        :root {
+            --primary: #4CAF50;
+            --dark-green: #2E7D32;
+            --light: #f8f9fa;
+            --dark: #333;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* ===== الهيدر ===== */
+        .header {
+            background: var(--primary);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        /* ===== القائمة ===== */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        
+        /* ===== المحتوى الرئيسي ===== */
+        .main-content {
+            padding: 7rem 2rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* ===== أقسام الموقع ===== */
+        
+        /* قسم الهيرو */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            margin: 0 10px;
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--primary);
+        }
+        
+        .cta-button.secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* قسم الخدمات */
+        .services {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--dark-green);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: rgb(218, 143, 143);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* قسم فريق العمل */
+        .team {
+            padding: 4rem 0;
+            background: #f0f4f8;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .member-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        /* قسم الاتصال */
+        .contact {
+            padding: 4rem 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* ===== التصميم المتجاوب ===== */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--dark-green);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.4s ease-out;
+                z-index: 1050;
+            }
+            
+            .nav-links.active {
+                right: 0;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            body.nav-open {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .cta-button {
+                display: block;
+                margin: 10px auto;
+                max-width: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                width: 100%;
+            }
+            
+            .main-content {
+                padding: 6rem 1rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">خليل ويب</div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">الخدمات</a></li>
+                <li><a href="#team">فريق العمل</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <!-- قسم الهيرو -->
+        <section class="hero" id="home">
+            <h1>حلول تقنية مبتكرة لعملك</h1>
+            <p>نقدم أحدث الحلول البرمجية والتسويقية لمساعدة عملك على النمو والازدهار في العصر الرقمي</p>
+            <div class="hero-buttons">
+                <a href="#services" class="cta-button">استكشف خدماتنا</a>
+                <a href="#contact" class="cta-button secondary">تواصل معنا</a>
+            </div>
+        </section>
+        
+        <!-- قسم الخدمات -->
+        <section class="services" id="services">
+            <h2 class="section-title">خدماتنا</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>تطوير الويب</h3>
+                    <p>تصميم وتطوير مواقع الويب الاحترافية بتقنيات حديثة تتوافق مع جميع الأجهزة</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>تطبيقات الجوال</h3>
+                    <p>بناء تطبيقات الهاتف المبتكرة لنظامي Android و iOS بجودة عالية</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>التسويق الرقمي</h3>
+                    <p>حلول تسويقية متكاملة لزيادة وجودك الرقمي وجذب العملاء</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- قسم فريق العمل -->
+        <section class="team" id="team">
+            <h2 class="section-title">فريقنا</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image" style="background-image: url('thumbnail_1000061207.jpg');"></div>
+                    <div class="member-info">
+                        <h3>بن جمعة خليل</h3>
+                        <p>مطور ويب متوسط</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                    <div class="member-info">
+                        <h3>سارة عبدالله</h3>
+                        <p>مصممة تجربة المستخدم</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image" style="background-image: url('https://randomuser.me/api/portraits/men/75.jpg');"></div>
+                    <div class="member-info">
+                        <h3>خالد علي</h3>
+                        <p>خبير التسويق الرقمي</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- قسم الاتصال -->
+        <section class="contact" id="contact">
+            <h2 class="section-title">تواصل معنا</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">الرسالة</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="cta-button">إرسال الرسالة</button>
+            </form>
+        </section>
+    </main>
+    
+    <!-- الفوتر -->
+    <footer>
+        <div class="logo">خليل ويب</div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>جميع الحقوق محفوظة &copy; 2025</p>
+    </footer>
+
+    <!-- السكريبتات -->
+    <script>
+        // القائمة المتنقلة
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+            document.body.classList.toggle('nav-open');
+            
+            this.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.body.classList.remove('nav-open');
+                document.getElementById('menuToggle').innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // تأثير التمرير السلس للروابط
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // إرسال النموذج
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('تم إرسال رسالتك بنجاح! سنتواصل معك قريبًا.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
